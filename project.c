@@ -54,20 +54,20 @@ int putInTable( char *s,pointTab table)
             else 
             {
                 table[t].info[0]=s[i];
+                i++;
                 j=i;
-                while ( isdigit(s[i])!=0 || s[i]=='.' )
+                 while ( isdigit(s[i])!=0 || s[i]=='.' )
                 {
                     i++;
                 }
-            
-                int m=1;
+                i--;
+                 int m=1;
                 for ( j; j <= i; j++)
                 {
                      table[t].info[m]=s[j];
                      m++;
                 }
                 table[t].info[m]='\0';
-   
 
                 }
                     cond=true;
@@ -103,7 +103,7 @@ int main(){
     
     tab table[512];
     int tailleTab;
-    char string[512]="(3.2+435)";
+    char string[512]="(-3.4-435)";
     
     tailleTab =putInTable(string,table);
    for (int i = 0; i <tailleTab ; i++)
