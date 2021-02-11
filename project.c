@@ -32,7 +32,6 @@ void rmSpace(char *s)
 int putInTable( char *s,pointTab table)
 {
 
-    char inter[50];
     bool cond;
     int i=0,j,t=0;
     while (s[i]!='\0')
@@ -50,19 +49,18 @@ int putInTable( char *s,pointTab table)
              if (s[i-1]!='+' && s[i-1]!='-' && s[i-1]!= '*' && s[i-1]!='/' &&  s[i-1]!= '(' && s[i]!='%')
             {
                  table[t].info[0]=s[i];
-                 table[t].info[1]='\0';
-            printf("yes\n");
-   
+                 table[t].info[1]='\0';   
             }
             else 
             {
+                table[t].info[0]=s[i];
                 j=i;
-                while (s[i]!='\0' && isdigit(s[i])!=0)
+                while ( isdigit(s[i])!=0 || s[i]=='.' )
                 {
                     i++;
                 }
             
-                int m=0;
+                int m=1;
                 for ( j; j <= i; j++)
                 {
                      table[t].info[m]=s[j];
@@ -76,10 +74,10 @@ int putInTable( char *s,pointTab table)
                     t++;     
         }
 
-        if (isdigit(s[i])!=0 && cond==false)
+        if (isdigit(s[i])!=0 )
         {
                 j=i;
-            while (s[i]!='\0' && isdigit(s[i])!=0)
+            while (  s[i]=='.' || isdigit(s[i])!=0 )
             {
                 i++;
             }
@@ -105,7 +103,7 @@ int main(){
     
     tab table[512];
     int tailleTab;
-    char string[512]="(32+-435)";
+    char string[512]="(3.2+435)";
     
     tailleTab =putInTable(string,table);
    for (int i = 0; i <tailleTab ; i++)
